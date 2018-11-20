@@ -55,39 +55,33 @@ for i in range(1, N-1):
 
             paths.update({(i, j): temp_paths})
 
+
 # problem solving section
 visited = []
+processed = []
 stack = []
 stack.append((S1, S2))
 visited.append((S1, S2))
 no_options = True
-S1prev = 0
-S2prev = 0
 test = stack[0]
 
 while N not in test:
 
-    arr = paths.get((S1, S2))
+    arr = paths.get(test)
     if arr is None:
         arr = []
     for i in range(len(arr)):
-        if arr[i] in visited:
+        if arr[i] in processed:
             continue
         else:
             no_options = False
-            visited.append(arr[i])
             stack.append(arr[i])
-            S1prev = S1
-            S2prev = S2
-            S1 = arr[i][0]
-            S2 = arr[i][1]
             test = arr[i]
             break
-    if no_options is True:
+    if no_options is True or stack.count(test) == 2:
         stack.pop()
-        S1 = S1prev
-        S2 = S2prev
-        test = (S1, S2)
+        processed.append(stack[len(stack) - 1])
+        test = stack[len(stack)-1]
     no_options = True
 
 
