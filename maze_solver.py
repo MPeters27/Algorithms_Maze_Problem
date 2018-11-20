@@ -28,6 +28,7 @@ for i in range(M):
         initial_graph.get(arr[0]).append(arr[1])
         initial_graph.get(arr[0]).append(arr[2])
 
+
 # problem solving section
 visited = []
 state = (S1, S2)
@@ -53,6 +54,42 @@ for i in range(1, N-1):
                 temp_paths.append((i, int(arr2[index - 1])))
 
             paths.update({(i, j): temp_paths})
+
+# problem solving section
+visited = []
+stack = []
+stack.append((S1, S2))
+visited.append((S1, S2))
+no_options = True
+S1prev = 0
+S2prev = 0
+test = stack[0]
+
+while N not in test:
+
+    arr = paths.get((S1, S2))
+    if arr is None:
+        arr = []
+    for i in range(len(arr)):
+        if arr[i] in visited:
+            continue
+        else:
+            no_options = False
+            visited.append(arr[i])
+            stack.append(arr[i])
+            S1prev = S1
+            S2prev = S2
+            S1 = arr[i][0]
+            S2 = arr[i][1]
+            test = arr[i]
+            break
+    if no_options is True:
+        stack.pop()
+        S1 = S1prev
+        S2 = S2prev
+        test = (S1, S2)
+    no_options = True
+
 
 
 
