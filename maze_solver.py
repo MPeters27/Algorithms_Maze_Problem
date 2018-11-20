@@ -1,5 +1,29 @@
-#Read in first two numbers to establish boundaries
-#Read in second line to assign colors to the vertices
-#Read in third line to establish starting locations
-#Read in the remaining lines, as such: the first item is a key. It will map
-# to the two other values, an int and a char.
+# read the first line
+file = open("maze_input", "r")
+N = int(file.readline(2))
+file.readline(1)
+M = int(file.readline(2))
+file.readline()
+
+# read the second line
+line2 = file.readline()
+vertex_colors = line2[0::2]
+
+# read the third line
+S1 = int(file.readline(1))
+file.readline(1)
+S2 = int(file.readline(1))
+file.readline()
+
+# read the remaining lines
+initial_graph = {}  # contains the initial graph data
+for i in range(M):
+    line = file.readline()
+    line = line.replace("\n", "")
+    arr = line.split(" ")
+    temp = initial_graph.get(arr[0])
+    if temp is None:
+        initial_graph.update({arr[0] : [arr[1], arr[2]]})
+    else:
+        initial_graph.get(arr[0]).append(arr[1])
+        initial_graph.get(arr[0]).append(arr[2])
