@@ -84,5 +84,18 @@ while N not in test:
         test = stack[len(stack)-1]
     no_options = True
 
+# captain rocket lieutenant lucky
+# print the result
+
+file2 = open("maze_output", "w")
+
+for i in range(1, len(stack)):
+    after = stack[i]
+    before = stack[i-1]
+    if after[0] != before[0]:
+        file2.writelines("R " + str(after[0]) + "\n")
+    else:
+        file2.writelines("L " + str(after[1]) + "\n")
+
 
 
