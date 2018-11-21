@@ -28,15 +28,14 @@ for i in range(M):
         initial_graph.get(arr[0]).append(arr[1])
         initial_graph.get(arr[0]).append(arr[2])
 
-
-# problem solving section
+# create the graph adjacency list
 visited = []
 state = (S1, S2)
 visited.append(state)
 paths = {}
 
-for i in range(1, N-1):
-    for j in range(1, N-1):
+for i in range(1, N):
+    for j in range(1, N):
         if i == j:
             continue
         else:
@@ -66,24 +65,24 @@ no_options = True
 test = stack[0]
 
 while N not in test:
-
     arr = paths.get(test)
     if arr is None:
         arr = []
     for i in range(len(arr)):
-        if arr[i] in processed:
+        if arr[i] in processed or arr[i] in visited:
             continue
         else:
             no_options = False
             stack.append(arr[i])
+            visited.append(arr[i])
             test = arr[i]
             break
-    if no_options is True or stack.count(test) == 2:
-        stack.pop()
+    if no_options is True:
         processed.append(stack[len(stack) - 1])
+        stack.pop()
+        visited.pop()
         test = stack[len(stack)-1]
     no_options = True
-
 
 
 
