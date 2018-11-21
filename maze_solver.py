@@ -29,9 +29,6 @@ for i in range(M):
         initial_graph.get(arr[0]).append(arr[2])
 
 # create the graph adjacency list
-visited = []
-state = (S1, S2)
-visited.append(state)
 paths = {}
 
 for i in range(1, N):
@@ -54,8 +51,7 @@ for i in range(1, N):
 
             paths.update({(i, j): temp_paths})
 
-
-# problem solving section
+# depth first search used to solve the problem
 visited = []
 processed = []
 stack = []
@@ -84,9 +80,8 @@ while N not in test:
         test = stack[len(stack)-1]
     no_options = True
 
-# captain rocket lieutenant lucky
-# print the result
 
+# write the result to an output file
 file2 = open("maze_output", "w")
 
 for i in range(1, len(stack)):
@@ -94,8 +89,7 @@ for i in range(1, len(stack)):
     before = stack[i-1]
     if after[0] != before[0]:
         file2.writelines("R " + str(after[0]) + "\n")
+        print("R " + str(after[0]))
     else:
         file2.writelines("L " + str(after[1]) + "\n")
-
-
-
+        print("L " + str(after[1]))
